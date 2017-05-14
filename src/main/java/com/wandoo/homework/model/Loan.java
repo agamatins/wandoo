@@ -42,20 +42,40 @@ public class Loan {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public BigDecimal getMainAmount() {
         return mainAmount;
+    }
+
+    public void setMainAmount(BigDecimal mainAmount) {
+        this.mainAmount = mainAmount;
     }
 
     public BigDecimal getInterestRate() {
         return interestRate;
     }
 
+    public void setInterestRate(BigDecimal interestRate) {
+        this.interestRate = interestRate;
+    }
+
     public List<Payment> getPayments() {
         return payments;
     }
 
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
+
     public List<Investment> getInvestments() {
         return investments;
+    }
+
+    public void setInvestments(List<Investment> investments) {
+        this.investments = investments;
     }
 
     private BigDecimal getSumOfAllPayments() {

@@ -17,6 +17,10 @@ public class Investment {
     @JoinColumn(name="loan_id")
     private Loan loanId;
 
+    @ManyToOne
+    @JoinColumn(name="customer_id")
+    private Loan customerId;
+
     public Long getId() {
         return id;
     }
@@ -39,5 +43,13 @@ public class Investment {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public Loan getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Loan customerId) {
+        this.customerId = customerId;
     }
 }
