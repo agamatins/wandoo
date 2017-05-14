@@ -14,6 +14,10 @@ public class LoanService {
     @Autowired
     private LoanRepository loanRepository;
 
+    public List<Loan> getAll() {
+        return loanRepository.getAll();
+    }
+
     public List<Loan> getAllInvestable() {
         return loanRepository.getAll()
                 .stream()

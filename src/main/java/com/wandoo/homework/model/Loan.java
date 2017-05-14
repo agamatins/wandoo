@@ -1,5 +1,7 @@
 package com.wandoo.homework.model;
 
+import com.wandoo.homework.beans.LoanBean;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,16 +28,18 @@ public class Loan {
     public Loan() {
     }
 
+    public Loan(LoanBean loanBean) {
+        this.id = loanBean.getId();
+        this.mainAmount = loanBean.getMainAmount();
+        this.interestRate = loanBean.getInterestRate();
+    }
+
     public Loan(Long id,
                 BigDecimal mainAmount,
-                BigDecimal interestRate,
-                List<Payment> payments,
-                List<Investment> investments) {
+                BigDecimal interestRate) {
         this.id = id;
         this.mainAmount = mainAmount;
         this.interestRate = interestRate;
-        this.payments = payments;
-        this.investments = investments;
     }
 
     public Long getId() {
