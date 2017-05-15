@@ -11,6 +11,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: 'groovy'
 
 jar {
     baseName = 'wandoo'
@@ -29,7 +30,7 @@ configurations {
 sourceSets {
     test {
         java {
-            srcDirs = ["src/main/test/java"]
+            srcDirs = ["src/test/groovy"]
         }
     }
 }
@@ -37,19 +38,22 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-web"
-    compile "org.springframework.boot:spring-boot-starter-log4j"
-    compile "org.springframework.boot:spring-boot-starter-data-jpa:1.5.3.RELEASE"
-    compile "com.sun.jersey:jersey-client:1.19"
 //    compile "com.fasterxml.jackson.core:jackson-databind:2.5.0"
-    compile "ir.cafebabe.math.utils:bigdecimal-utils:0.0.1-SNAPSHOT"
-    compile "org.apache.commons:commons-collections4:4.1"
-    compile "com.h2database:h2"
-    testCompile "org.springframework.boot:spring-boot-starter-test"
-    testCompile "com.jayway.jsonpath:json-path:2.2.0"
-    compile "org.codehaus.groovy:groovy-all:2.4.10"
-    testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
-//    testCompile("junit:junit")
+    compile("org.apache.commons:commons-lang3:3.5",
+             "org.springframework.boot:spring-boot-starter-web",
+             "org.springframework.boot:spring-boot-starter-log4j",
+             "org.springframework.boot:spring-boot-starter-data-jpa:1.5.3.RELEASE",
+             "com.sun.jersey:jersey-client:1.19",
+             "org.apache.commons:commons-collections4:4.1",
+             "com.h2database:h2",
+             "org.codehaus.groovy:groovy-all:2.4.10",
+    )
+    testCompile(
+            'junit:junit:4.12',
+            "org.codehaus.groovy:groovy-all:2.4.10",
+            'org.spockframework:spock-core:1.0-groovy-2.4',
+            "org.springframework.boot:spring-boot-starter-test",
+    )
 }
 
 task wrapper(type: Wrapper) {
