@@ -1,12 +1,15 @@
 package com.wandoo.homework.services;
 
+import com.wandoo.homework.beans.LoanBean;
+import com.wandoo.homework.requestbeans.LoanRequestBean;
+import com.wandoo.homework.exceptions.DuplicateObjectException;
 import com.wandoo.homework.model.Loan;
 import com.wandoo.homework.repositories.LoanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -14,21 +17,29 @@ public class LoanService {
     @Autowired
     private LoanRepository loanRepository;
 
-    public List<Loan> getAll() {
-        return loanRepository.getAll();
-    }
-
-    public List<Loan> getAllInvestable() {
+    public List<LoanBean> getAll() {
         return loanRepository.getAll()
                 .stream()
-                .filter(Loan::isInvestable)
+                .map(Loan::toBean)
                 .collect(Collectors.toList());
     }
 
-    public void createLoan(Loan loan) {
-        if (loanRepository.get(loan.getId()).isPresent()) {
-            throw new DuplicateKeyException(String.format("Loan with id=%s already exist",loan.getId()));
+    public List<LoanBean> getInvestable() {
+        return loanRepository.getAll()
+                .stream()
+                .filter(Loan::isInvestable)
+                .map(Loan::toBean)
+                .collect(Collectors.toList());
+    }
+
+    public void createLoan(LoanRequestBean loanRequestBean) throws DuplicateObjectException {
+        if (loanRepository.get(loanRequestBean.getId()).isPresent()) {
+            throw new DuplicateObjectException(String.format("Loan with id=%s already exist",loanRequestBean.getId()));
         }
-        loanRepository.createLoan(loan);
+        loanRepository.createLoan(new Loan(loanRequestBean));
+    }
+
+    public Optional<LoanBean> get(Long id) {
+        return loanRepository.get(id).map(Loan::toBean);
     }
 }

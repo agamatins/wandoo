@@ -1,30 +1,27 @@
-package com.wandoo.homework.base;
+package com.wandoo.homework.responsebeans;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.wandoo.homework.base.ValidationMessage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestResponse<T> {
+public class BaseResponseBean<T> {
 
     private T body = null;
     private List<ValidationMessage> validationErrors = new ArrayList<>();
 
-    public RestResponse(List<ValidationMessage> validationErrors) {
-        this.body = null;
+    public BaseResponseBean() {
+    }
+
+    public BaseResponseBean(List<ValidationMessage> validationErrors) {
         this.validationErrors = validationErrors;
     }
 
-    public RestResponse() {
+    public BaseResponseBean(ValidationMessage validationError) {
+        this.validationErrors.add(validationError);
     }
 
-    public RestResponse(T object) {
-        this.body = object;
-        this.validationErrors = null;
-    }
-
-    public RestResponse(T object, List<ValidationMessage> validationErrors) {
+    public BaseResponseBean(T object, List<ValidationMessage> validationErrors) {
         this.body = object;
         this.validationErrors = validationErrors;
     }

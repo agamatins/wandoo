@@ -1,6 +1,7 @@
-package com.wandoo.homework.repositories;
+package com.wandoo.homework.repositories.impl;
 
 import com.wandoo.homework.model.Loan;
+import com.wandoo.homework.repositories.LoanRepository;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,19 +18,16 @@ public class LoanRepositoryImpl implements LoanRepository {
     private EntityManager entityManager;
 
     @Override
-    @Transactional
     public void createLoan(Loan loan) {
         entityManager.unwrap(Session.class).save(loan);
     }
 
     @Override
-    @Transactional
     @SuppressWarnings("unchecked")
     public List<Loan> getAll() {
         return entityManager.unwrap(Session.class)
                 .createCriteria(Loan.class)
                 .list();
-
     }
 
     @Override

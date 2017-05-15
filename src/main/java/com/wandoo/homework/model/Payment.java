@@ -1,5 +1,7 @@
 package com.wandoo.homework.model;
 
+import com.wandoo.homework.beans.PaymentBean;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -12,7 +14,7 @@ public class Payment {
 
     @ManyToOne
     @JoinColumn(name="loan_id")
-    private Loan loanId;
+    private Loan loan;
 
     @Column(name="main_amount")
     private BigDecimal mainAmount;
@@ -28,12 +30,12 @@ public class Payment {
         this.id = id;
     }
 
-    public Loan getLoanId() {
-        return loanId;
+    public Loan getLoan() {
+        return loan;
     }
 
-    public void setLoanId(Loan loanId) {
-        this.loanId = loanId;
+    public void setLoan(Loan loan) {
+        this.loan = loan;
     }
 
     public BigDecimal getMainAmount() {
@@ -50,5 +52,14 @@ public class Payment {
 
     public void setInterestAmount(BigDecimal interestAmount) {
         this.interestAmount = interestAmount;
+    }
+
+    public PaymentBean toBean() {
+        PaymentBean paymentBean = new PaymentBean();
+        paymentBean.setId(this.getId());
+        paymentBean.setMainAmount(this.getMainAmount());
+        paymentBean.setInterestAmount(this.getInterestAmount());
+        paymentBean.setLoanId(this.getLoan().getId());
+        return paymentBean;
     }
 }

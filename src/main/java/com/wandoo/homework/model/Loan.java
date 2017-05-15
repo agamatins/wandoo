@@ -1,6 +1,9 @@
 package com.wandoo.homework.model;
 
 import com.wandoo.homework.beans.LoanBean;
+import com.wandoo.homework.requestbeans.LoanRequestBean;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -19,19 +22,21 @@ public class Loan {
     @Column(name="interest_rate")
     private BigDecimal interestRate;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="loan", cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Payment> payments;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="loan", cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Investment> investments;
 
     public Loan() {
     }
 
-    public Loan(LoanBean loanBean) {
-        this.id = loanBean.getId();
-        this.mainAmount = loanBean.getMainAmount();
-        this.interestRate = loanBean.getInterestRate();
+    public Loan(LoanRequestBean loanRequestBean) {
+        this.id = loanRequestBean.getId();
+        this.mainAmount = loanRequestBean.getMainAmount();
+        this.interestRate = loanRequestBean.getInterestRate();
     }
 
     public Loan(Long id,
@@ -102,5 +107,15 @@ public class Loan {
 
     public boolean isInvestable() {
         return getAllowedInvestmentAmount().compareTo(BigDecimal.ZERO) > 0;
+    }
+
+    public LoanBean toBean() {
+        LoanBean loanBean = new LoanBean();
+        loanBean.setId(this.getId());
+        loanBean.setMainAmount(this.getMainAmount());
+        loanBean.setInterestRate(this.getInterestRate());
+        loanBean.setInvestable(this.isInvestable());
+        loanBean.setAllowedInvestmentAmount(this.getAllowedInvestmentAmount());
+        return loanBean;
     }
 }
