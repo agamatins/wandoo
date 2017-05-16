@@ -1,5 +1,6 @@
 package com.wandoo.homework.services;
 
+import com.wandoo.homework.base.AppDefaults;
 import com.wandoo.homework.beans.CustomerBean;
 import com.wandoo.homework.exceptions.CustomerNotFoundException;
 import com.wandoo.homework.exceptions.DuplicateObjectException;
@@ -35,7 +36,7 @@ public class CustomerService {
 
     public void registerCustomer(CustomerRequestBean customerRequestBean) throws DuplicateObjectException {
         if (customerRepository.getByEmail(customerRequestBean.getEmail()).isPresent()) {
-            throw new DuplicateObjectException(String.format("Customer with email=%s already exist", customerRequestBean.getEmail()));
+            throw new DuplicateObjectException(AppDefaults.CUSTOMER_ALREADY_REGISTERED_WITH_EMAIL);
         }
 
         Customer customer = new Customer();
@@ -47,6 +48,10 @@ public class CustomerService {
 
     public Optional<CustomerBean> get(Long id) {
         return customerRepository.get(id).map(Customer::toBean);
+    }
+
+    public Optional<CustomerBean> getLastRegistered() {
+        return customerRepository.getLastRegistered().map(Customer::toBean);
     }
 
     public Optional<CustomerBean> getByEmail(String email) {

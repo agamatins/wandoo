@@ -11,4 +11,6 @@ public interface CustomerRepository {
     Optional<Customer> get(Long id);
 
     Optional<Customer> getByEmail(String email);
+
+    Optional<Customer> getLastRegistered();
 }

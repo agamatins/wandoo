@@ -19,8 +19,18 @@ public class CustomerResource {
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-    public BaseResponseBean list(@PathVariable("id") Long id) {
+    public BaseResponseBean get(@PathVariable("id") Long id) {
         return customerResourceService.get(id);
+    }
+
+    @RequestMapping(value = "/get-by-email/{email}", method = RequestMethod.GET)
+    public BaseResponseBean getByEmail(@PathVariable("email") String email) {
+        return customerResourceService.getByEmail(email);
+    }
+
+    @RequestMapping(value = "/get-last", method = RequestMethod.GET)
+    public BaseResponseBean get() {
+        return customerResourceService.getLastRegistered();
     }
 
     @RequestMapping(value = "/invest", method = RequestMethod.POST)

@@ -1,11 +1,14 @@
 package com.wandoo.homework.requestbeans;
 
+import com.wandoo.homework.base.AppDefaults;
 import com.wandoo.homework.base.MessageType;
 import com.wandoo.homework.base.ValidationMessage;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.wandoo.homework.base.BigDecimalUtils.is;
 
 public class InvestmentRequestBean {
 
@@ -41,17 +44,17 @@ public class InvestmentRequestBean {
         List<ValidationMessage> validationErrors = new ArrayList<>();
 
         if (this.getLoanId() == null) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, "loan id cannot be empty", "loanId"));
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.CANNOT_BE_EMPTY, "loanId"));
         }
 
         if (this.getCustomerId() == null) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, "customer id cannot be empty", "customerId"));
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.CANNOT_BE_EMPTY, "customerId"));
         }
 
         if (this.getAmount() == null) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, "amount cannot be empty", "amount"));
-        } else if (this.getAmount().compareTo(BigDecimal.ONE) < 0 || this.getAmount().compareTo(new BigDecimal(1000)) > 0) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, "amount cannot be less than 1 or more than 1000", "amount"));
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.CANNOT_BE_EMPTY, "amount"));
+        } else if (!is(this.getAmount()).betweenIncluding(BigDecimal.ONE, new BigDecimal(1000))) {
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.MAIN_AMOUNT_INCORRECT_FORMAT, "amount"));
         }
 
         return validationErrors;

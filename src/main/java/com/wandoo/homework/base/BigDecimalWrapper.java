@@ -31,23 +31,11 @@ public final class BigDecimalWrapper {
         return bigDecimal.compareTo(decimal) <= ZERO;
     }
 
-    public boolean notEq(BigDecimal decimal) {
-        return !eq(decimal);
+    public boolean betweenIncluding(BigDecimal left, BigDecimal right) {
+        return bigDecimal.compareTo(left) >= ZERO && bigDecimal.compareTo(right) <= ZERO;
+    }
+    public boolean betweenExcluding(BigDecimal left, BigDecimal right) {
+        return bigDecimal.compareTo(left) > ZERO && bigDecimal.compareTo(right) < ZERO;
     }
 
-    public boolean notGt(BigDecimal decimal) {
-        return !gt(decimal);
-    }
-
-    public boolean notGte(BigDecimal decimal) {
-        return !gte(decimal);
-    }
-
-    public boolean notLt(BigDecimal decimal) {
-        return !lt(decimal);
-    }
-
-    public boolean notLte(BigDecimal decimal) {
-        return !lte(decimal);
-    }
 }

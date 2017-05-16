@@ -1,11 +1,14 @@
 package com.wandoo.homework.requestbeans;
 
+import com.wandoo.homework.base.AppDefaults;
 import com.wandoo.homework.base.MessageType;
 import com.wandoo.homework.base.ValidationMessage;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.wandoo.homework.base.BigDecimalUtils.is;
 
 public class PaymentRequestBean {
 
@@ -50,23 +53,23 @@ public class PaymentRequestBean {
         List<ValidationMessage> validationErrors = new ArrayList<>();
 
         if (this.getId() == null) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, "payment id cannot be empty", "id"));
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.CANNOT_BE_EMPTY, "id"));
         }
 
         if (this.getLoanId() == null) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, "loan id for payment cannot be empty", "id"));
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.CANNOT_BE_EMPTY, "loanId"));
         }
 
         if (this.getMainAmount() == null) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, "main amount cannot be empty", "mainAmount"));
-        } else if (this.getMainAmount().compareTo(BigDecimal.ZERO) < 0 || this.getMainAmount().compareTo(new BigDecimal(1000)) > 0) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, "main amount cannot be less than 1 or more than 1000", "mainAmount"));
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.CANNOT_BE_EMPTY, "mainAmount"));
+        } else if (!is(this.getMainAmount()).betweenIncluding(BigDecimal.ONE, new BigDecimal(1000))) {
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.MAIN_AMOUNT_INCORRECT_FORMAT, "mainAmount"));
         }
 
         if (this.getInterestAmount() == null) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, "interest amount cannot be empty", "interestAmount"));
-        } else if (this.getInterestAmount().compareTo(BigDecimal.ZERO) < 0 || this.getInterestAmount().compareTo(new BigDecimal(1000)) > 0) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, "interest amount cannot be less than 0 or more than 1000", "interestAmount"));
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.CANNOT_BE_EMPTY, "interestAmount"));
+        } else if (!is(this.getInterestAmount()).betweenIncluding(BigDecimal.ZERO, new BigDecimal(1000))) {
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.INTEREST_AMOUNT_INCORRECT_FORMAT, "interestAmount"));
         }
 
         return validationErrors;

@@ -8,22 +8,22 @@ import java.util.List;
 public class BaseResponseBean<T> {
 
     private T body = null;
-    private List<ValidationMessage> validationErrors = new ArrayList<>();
+    private List<ValidationMessage> errors = new ArrayList<>();
 
     public BaseResponseBean() {
     }
 
-    public BaseResponseBean(List<ValidationMessage> validationErrors) {
-        this.validationErrors = validationErrors;
+    public BaseResponseBean(List<ValidationMessage> errors) {
+        this.errors = errors;
     }
 
     public BaseResponseBean(ValidationMessage validationError) {
-        this.validationErrors.add(validationError);
+        this.errors.add(validationError);
     }
 
-    public BaseResponseBean(T object, List<ValidationMessage> validationErrors) {
+    public BaseResponseBean(T object, List<ValidationMessage> errors) {
         this.body = object;
-        this.validationErrors = validationErrors;
+        this.errors = errors;
     }
 
     public T getBody() {
@@ -34,11 +34,11 @@ public class BaseResponseBean<T> {
         this.body = body;
     }
 
-    public List<ValidationMessage> getValidationErrors() {
-        return validationErrors;
+    public List<ValidationMessage> getErrors() {
+        return errors;
     }
 
-    public void setValidationErrors(List<ValidationMessage> validationErrors) {
-        this.validationErrors = validationErrors;
+    public void setErrors(List<ValidationMessage> errors) {
+        this.errors = errors;
     }
 }

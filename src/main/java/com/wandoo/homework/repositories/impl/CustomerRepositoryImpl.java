@@ -4,6 +4,7 @@ import com.wandoo.homework.model.Customer;
 import com.wandoo.homework.model.Loan;
 import com.wandoo.homework.repositories.CustomerRepository;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,6 +32,16 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         Customer customer = (Customer)entityManager.unwrap(Session.class)
                 .createCriteria(Customer.class)
                 .add(Restrictions.eq("email", email))
+                .uniqueResult();
+        return Optional.ofNullable(customer);
+    }
+
+    @Override
+    public Optional<Customer> getLastRegistered() {
+        Customer customer = (Customer)entityManager.unwrap(Session.class)
+                .createCriteria(Customer.class)
+                .addOrder(Order.desc("id"))
+                .setMaxResults(1)
                 .uniqueResult();
         return Optional.ofNullable(customer);
     }
