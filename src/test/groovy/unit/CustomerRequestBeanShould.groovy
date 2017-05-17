@@ -3,7 +3,9 @@ package unit
 import com.wandoo.homework.base.AppDefaults
 import com.wandoo.homework.requestbeans.CustomerRequestBean
 import spock.lang.Specification
+import spock.lang.Unroll
 
+@Unroll
 class CustomerRequestBeanShould extends Specification{
 
     def "request bean validation should contain all errors"() {
@@ -63,7 +65,7 @@ class CustomerRequestBeanShould extends Specification{
         lastName            |   errorMessage                    | field
         "Aaa"               |   ""                              |   ""
         ""                  |   AppDefaults.CANNOT_BE_EMPTY     |   "lastName"
-        null                |   AppDefaults.CANNOT_BE_EMPTY     |   "lastName"
+        null                  |   AppDefaults.CANNOT_BE_EMPTY     |   "lastName"
         " "                 |   AppDefaults.CANNOT_BE_EMPTY     |   "lastName"
         "."                 |   AppDefaults.INCORRECT_FORMAT    |   "lastName"
         "Aaa12"             |   AppDefaults.INCORRECT_FORMAT    |   "lastName"
@@ -88,7 +90,6 @@ class CustomerRequestBeanShould extends Specification{
         email                   |   errorMessage                    | field
         "some@email.com"        |   ""                              |   ""
         ""                      |   AppDefaults.CANNOT_BE_EMPTY     |   "email"
-        null                    |   AppDefaults.CANNOT_BE_EMPTY     |   "email"
         " "                     |   AppDefaults.CANNOT_BE_EMPTY     |   "email"
         "."                     |   AppDefaults.INCORRECT_FORMAT    |   "email"
         "Aaa12@"                |   AppDefaults.INCORRECT_FORMAT    |   "email"

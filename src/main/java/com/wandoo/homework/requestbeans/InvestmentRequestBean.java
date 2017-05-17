@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.wandoo.homework.base.BigDecimalUtils.is;
+import static com.wandoo.homework.base.BigDecimalUtils.amount;
 
 public class InvestmentRequestBean {
 
@@ -53,7 +53,7 @@ public class InvestmentRequestBean {
 
         if (this.getAmount() == null) {
             validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.CANNOT_BE_EMPTY, "amount"));
-        } else if (!is(this.getAmount()).betweenIncluding(BigDecimal.ONE, new BigDecimal(1000))) {
+        } else if (!amount(this.getAmount()).betweenIncluding(BigDecimal.ONE, new BigDecimal(1000))) {
             validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.MAIN_AMOUNT_INCORRECT_FORMAT, "amount"));
         }
 

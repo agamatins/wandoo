@@ -2,9 +2,11 @@ package unit
 
 import com.wandoo.homework.services.CustomerService
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class CustomerServiceShould extends Specification {
 
+    @Unroll
     def "test available investment amount"() {
         given:
         def customerService = new CustomerService()

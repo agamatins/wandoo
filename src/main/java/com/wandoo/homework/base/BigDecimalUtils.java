@@ -7,7 +7,7 @@ public class BigDecimalUtils {
     private BigDecimalUtils() {
     }
 
-    public static BigDecimalWrapper is(BigDecimal decimal) {
+    public static BigDecimalWrapper amount(BigDecimal decimal) {
 
         return new BigDecimalWrapper(decimal);
     }

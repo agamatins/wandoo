@@ -3,9 +3,9 @@ package com.wandoo.homework.repositories.impl;
 import com.wandoo.homework.model.Loan;
 import com.wandoo.homework.repositories.LoanRepository;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -33,5 +33,15 @@ public class LoanRepositoryImpl implements LoanRepository {
     @Override
     public Optional<Loan> get(Long id) {
         return Optional.ofNullable(entityManager.find(Loan.class, id));
+    }
+
+    @Override
+    public Optional<Loan> getLast() {
+        Loan loan = (Loan)entityManager.unwrap(Session.class)
+                .createCriteria(Loan.class)
+                .addOrder(Order.desc("id"))
+                .setMaxResults(1)
+                .uniqueResult();
+        return Optional.ofNullable(loan);
     }
 }

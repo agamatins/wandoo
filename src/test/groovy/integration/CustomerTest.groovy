@@ -2,45 +2,34 @@ package integration
 
 import com.wandoo.homework.Application
 import com.wandoo.homework.base.AppDefaults
-import com.wandoo.homework.requestbeans.CustomerRequestBean
+import helpers.TestBaseSpec
 import org.springframework.boot.context.embedded.LocalServerPort
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.annotation.DirtiesContext
-import spock.lang.Specification
-import spock.lang.Unroll
-import wrappers.ClientApiWrapper
+import wrappers.CustomerApiWrapper
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class CustomerTest extends Specification{
+class CustomerTest extends TestBaseSpec{
 
     @LocalServerPort
     int randomServerPort;
 
-    final EMAIL = "some@email.com"
-    final FIRST_NAME = "First Name"
-    final LAST_NAME = "Last Name"
-    def clientApiWrapper
-    def customerRequestBean
+    def customerApiWrapper
 
     def setup() {
-        clientApiWrapper = new ClientApiWrapper(randomServerPort)
-
-        customerRequestBean = new CustomerRequestBean()
-        customerRequestBean.email = EMAIL
-        customerRequestBean.firstName = FIRST_NAME
-        customerRequestBean.lastName = LAST_NAME
+        customerApiWrapper = new CustomerApiWrapper(randomServerPort)
     }
 
     def "customer can register"() {
         when:
-        def registerResponse = clientApiWrapper.registerCustomer(customerRequestBean)
+        def registerResponse = registerCustomerAndGetResponse(customerApiWrapper)
 
         then:
         registerResponse.errors.isEmpty()
 
         when:
-        def customer = clientApiWrapper.getLastRegisteredCustomer().body
+        def customer = customerApiWrapper.getLastRegisteredCustomer().body
 
         then:
         customer != null
@@ -51,13 +40,13 @@ class CustomerTest extends Specification{
 
     def "cannot register with the same email"() {
         when:
-        def registerResponse = clientApiWrapper.registerCustomer(customerRequestBean)
+        def registerResponse = registerCustomerAndGetResponse(customerApiWrapper)
 
         then:
         registerResponse.errors.isEmpty()
 
         when:
-        registerResponse = clientApiWrapper.registerCustomer(customerRequestBean)
+        registerResponse = registerCustomerAndGetResponse(customerApiWrapper)
 
         then:
         registerResponse.errors.size() == 1

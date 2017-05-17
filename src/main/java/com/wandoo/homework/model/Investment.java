@@ -1,5 +1,7 @@
 package com.wandoo.homework.model;
 
+import com.wandoo.homework.beans.InvestmentBean;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -51,5 +53,14 @@ public class Investment {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public InvestmentBean toBean() {
+        InvestmentBean investmentBean = new InvestmentBean();
+        investmentBean.setId(this.getId());
+        investmentBean.setCustomerId(this.getCustomer().getId());
+        investmentBean.setLoanId(this.getLoan().getId());
+        investmentBean.setAmount(this.getAmount());
+        return investmentBean;
     }
 }

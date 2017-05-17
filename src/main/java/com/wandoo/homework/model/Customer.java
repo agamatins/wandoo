@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Customer {
@@ -78,6 +79,9 @@ public class Customer {
         customerBean.setFirstName(this.getFirstName());
         customerBean.setLastName(this.getLastName());
         customerBean.setEmail(this.getEmail());
+        customerBean.setInvestments(this.getInvestments().stream()
+                .map(Investment::toBean)
+                .collect(Collectors.toList()));
         return customerBean;
     }
 }

@@ -21,4 +21,11 @@ public final class AppDefaults {
     public static final String INTEREST_RATE_INCORRECT_FORMAT = String.format(DEFAULT_AMOUNTS_INCORRECT_FORMAT_MESSAGE, MIN_INTEREST_RATE, MAX_INTEREST_RATE);
     public static final String INTEREST_AMOUNT_INCORRECT_FORMAT = String.format(DEFAULT_AMOUNTS_INCORRECT_FORMAT_MESSAGE, MIN_INTEREST_AMOUNT, MAX_INTEREST_AMOUNT);
     public static final String CUSTOMER_ALREADY_REGISTERED_WITH_EMAIL = "Customer already exist with this email";
+    public static final String CANNOT_FIND_CUSTOMER_ID = "Customer with given id cannot be found";
+    public static final String CANNOT_FIND_LOAN_ID = "Loan with given id cannot be found";
+    public static final String LOAN_NOT_INVESTABLE = "Cannot invest into loan - no open amount";
+    public static final String LOAN_ID_ALREADY_EXIST = "Loan with given id already imported";
+    public static final String PAYMENT_ID_ALREADY_EXIST = "Payment with given id already imported";
+    public static final String NOT_FOUND = "Not found";
+
 }

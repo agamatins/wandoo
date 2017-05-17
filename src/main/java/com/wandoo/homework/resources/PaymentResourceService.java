@@ -1,5 +1,6 @@
 package com.wandoo.homework.resources;
 
+import com.wandoo.homework.base.AppDefaults;
 import com.wandoo.homework.base.MessageType;
 import com.wandoo.homework.base.ValidationMessage;
 import com.wandoo.homework.beans.PaymentBean;
@@ -34,7 +35,7 @@ public class PaymentResourceService {
             validationErrors.add(new ValidationMessage(MessageType.ERROR, ex.getMessage(), "id"));
             return new BaseResponseBean(validationErrors);
         } catch (LoanNotFoundException lnfe) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, lnfe.getMessage(), "loan id"));
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, lnfe.getMessage(), "loanId"));
             return new BaseResponseBean(validationErrors);
         }
         return new BaseResponseBean();
@@ -44,7 +45,7 @@ public class PaymentResourceService {
     public BaseResponseBean get(Long id) {
         Optional<PaymentBean> paymentBean = paymentService.get(id);
         if (!paymentBean.isPresent()) {
-            return new BaseResponseBean(new ValidationMessage(MessageType.INFO, String.format("Payment with id=%s not found", id), "id"));
+            return new BaseResponseBean(new ValidationMessage(MessageType.INFO, AppDefaults.NOT_FOUND, "id"));
         }
         BaseResponseBean<PaymentBean> responseBean = new BaseResponseBean<>();
         responseBean.setBody(paymentBean.get());

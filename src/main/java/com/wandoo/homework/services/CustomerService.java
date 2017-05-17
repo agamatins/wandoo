@@ -18,9 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Optional;
 
-import static com.wandoo.homework.base.BigDecimalUtils.is;
+import static com.wandoo.homework.base.BigDecimalUtils.amount;
 
 @Service
 public class CustomerService {
@@ -61,16 +62,16 @@ public class CustomerService {
     public void invest(InvestmentRequestBean investmentRequestBean) throws CustomerNotFoundException, LoanNotFoundException, FailedInvestmentException {
         Optional<Customer> customer = customerRepository.get(investmentRequestBean.getCustomerId());
         if (!customer.isPresent()) {
-            throw new CustomerNotFoundException(String.format("Customer with id=%s cannot be found", investmentRequestBean.getCustomerId()));
+            throw new CustomerNotFoundException(AppDefaults.CANNOT_FIND_CUSTOMER_ID);
         }
 
         Optional<Loan> loan = loanRepository.get(investmentRequestBean.getLoanId());
         if (!loan.isPresent()) {
-            throw new LoanNotFoundException(String.format("Loan with id=%s cannot be found", investmentRequestBean.getLoanId()));
+            throw new LoanNotFoundException(AppDefaults.CANNOT_FIND_LOAN_ID);
         }
 
         if (!loan.get().isInvestable()) {
-            throw new FailedInvestmentException(String.format("Cannot invest into loan with id=%s - not investable", investmentRequestBean.getLoanId()));
+            throw new FailedInvestmentException(AppDefaults.LOAN_NOT_INVESTABLE);
         }
 
         BigDecimal investableAmount = getActualInvestmentAmount(investmentRequestBean.getAmount(), loan.get().getAllowedInvestmentAmount());
@@ -78,12 +79,12 @@ public class CustomerService {
         Investment investment = new Investment();
         investment.setLoan(loan.get());
         investment.setCustomer(customer.get());
-        investment.setAmount(investableAmount);
+        investment.setAmount(investableAmount.setScale(2, RoundingMode.HALF_UP));
         investmentRepository.createInvestment(investment);
     }
 
     private BigDecimal getActualInvestmentAmount(BigDecimal requestedAmount, BigDecimal maxAllowedAmount) {
-        return is(requestedAmount).gt(maxAllowedAmount) ? maxAllowedAmount : requestedAmount;
+        return amount(requestedAmount).gt(maxAllowedAmount) ? maxAllowedAmount : requestedAmount;
     }
 
 }

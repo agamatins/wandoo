@@ -1,11 +1,16 @@
 package com.wandoo.homework.beans;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+
 public class CustomerBean {
 
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
+    private List<InvestmentBean> investments;
 
     public Long getId() {
         return id;
@@ -37,5 +42,13 @@ public class CustomerBean {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<InvestmentBean> getInvestments() {
+        return investments;
+    }
+
+    public void setInvestments(List<InvestmentBean> investments) {
+        this.investments = investments;
     }
 }

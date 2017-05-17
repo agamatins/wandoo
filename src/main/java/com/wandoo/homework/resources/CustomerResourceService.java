@@ -1,5 +1,6 @@
 package com.wandoo.homework.resources;
 
+import com.wandoo.homework.base.AppDefaults;
 import com.wandoo.homework.base.MessageType;
 import com.wandoo.homework.base.ValidationMessage;
 import com.wandoo.homework.beans.CustomerBean;
@@ -44,7 +45,7 @@ public class CustomerResourceService {
     public BaseResponseBean get(Long id) {
         Optional<CustomerBean> customerBean = customerService.get(id);
         if (!customerBean.isPresent()) {
-            return new BaseResponseBean(new ValidationMessage(MessageType.INFO, String.format("Customer with id=%s not found", id), "id"));
+            return new BaseResponseBean(new ValidationMessage(MessageType.INFO, AppDefaults.NOT_FOUND, "id"));
         }
         BaseResponseBean<CustomerBean> responseBean = new BaseResponseBean<>();
         responseBean.setBody(customerBean.get());
@@ -55,7 +56,7 @@ public class CustomerResourceService {
     public BaseResponseBean getByEmail(String email) {
         Optional<CustomerBean> customerBean = customerService.getByEmail(email);
         if (!customerBean.isPresent()) {
-            return new BaseResponseBean(new ValidationMessage(MessageType.INFO, String.format("Customer with email=%s not found", email), "email"));
+            return new BaseResponseBean(new ValidationMessage(MessageType.INFO, AppDefaults.NOT_FOUND, "email"));
         }
         BaseResponseBean<CustomerBean> responseBean = new BaseResponseBean<>();
         responseBean.setBody(customerBean.get());
@@ -66,7 +67,7 @@ public class CustomerResourceService {
     public BaseResponseBean getLastRegistered() {
         Optional<CustomerBean> customerBean = customerService.getLastRegistered();
         if (!customerBean.isPresent()) {
-            return new BaseResponseBean(new ValidationMessage(MessageType.INFO, "No customers registered", ""));
+            return new BaseResponseBean(new ValidationMessage(MessageType.INFO, AppDefaults.NOT_FOUND, ""));
         }
         BaseResponseBean<CustomerBean> responseBean = new BaseResponseBean<>();
         responseBean.setBody(customerBean.get());

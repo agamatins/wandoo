@@ -7,7 +7,10 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
+
+import static com.wandoo.homework.base.BigDecimalUtils.amount;
 
 @Entity
 public class Loan {
@@ -35,8 +38,8 @@ public class Loan {
 
     public Loan(LoanRequestBean loanRequestBean) {
         this.id = loanRequestBean.getId();
-        this.mainAmount = loanRequestBean.getMainAmount();
-        this.interestRate = loanRequestBean.getInterestRate();
+        this.mainAmount = loanRequestBean.getMainAmount().setScale(2, RoundingMode.HALF_UP);
+        this.interestRate = loanRequestBean.getInterestRate().setScale(2, RoundingMode.HALF_UP);
     }
 
     public Loan(Long id,
@@ -100,13 +103,14 @@ public class Loan {
     }
 
     public BigDecimal getAllowedInvestmentAmount() {
-        return mainAmount
+        BigDecimal allowedInvestmentAmount =  mainAmount
                 .subtract(getSumOfAllPayments())
                 .subtract(getSumOfAllInvestments());
+        return amount(allowedInvestmentAmount).gtZero() ? allowedInvestmentAmount : BigDecimal.ZERO;
     }
 
     public boolean isInvestable() {
-        return getAllowedInvestmentAmount().compareTo(BigDecimal.ZERO) > 0;
+        return amount(getAllowedInvestmentAmount()).gt(BigDecimal.ZERO);
     }
 
     public LoanBean toBean() {

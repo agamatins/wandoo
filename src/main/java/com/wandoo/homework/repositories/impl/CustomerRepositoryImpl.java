@@ -1,7 +1,6 @@
 package com.wandoo.homework.repositories.impl;
 
 import com.wandoo.homework.model.Customer;
-import com.wandoo.homework.model.Loan;
 import com.wandoo.homework.repositories.CustomerRepository;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;

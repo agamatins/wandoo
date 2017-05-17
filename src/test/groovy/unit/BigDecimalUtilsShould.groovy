@@ -1,13 +1,16 @@
 package unit
 
 import spock.lang.Specification
-import static com.wandoo.homework.base.BigDecimalUtils.is
+import spock.lang.Unroll
 
+import static com.wandoo.homework.base.BigDecimalUtils.amount
+
+@Unroll
 class BigDecimalUtilsShould extends Specification {
 
     def "test eq"() {
         expect:
-        is(left).eq(right) == result
+        amount(left).eq(right) == result
         where:
         left    | right     | result
         100     | 100       | true
@@ -17,7 +20,7 @@ class BigDecimalUtilsShould extends Specification {
 
     def "test gt"() {
         expect:
-        is(left).gt(right) == result
+        amount(left).gt(right) == result
         where:
         left    | right     | result
         100     | 100       | false
@@ -28,7 +31,7 @@ class BigDecimalUtilsShould extends Specification {
 
     def "test gte"() {
         expect:
-        is(left).gte(right) == result
+        amount(left).gte(right) == result
         where:
         left    | right     | result
         100     | 100       | true
@@ -39,7 +42,7 @@ class BigDecimalUtilsShould extends Specification {
 
     def "test lt"() {
         expect:
-        is(left).lt(right) == result
+        amount(left).lt(right) == result
         where:
         left    | right     | result
         100     | 100       | false
@@ -50,7 +53,7 @@ class BigDecimalUtilsShould extends Specification {
 
     def "test lte"() {
         expect:
-        is(left).lte(right) == result
+        amount(left).lte(right) == result
         where:
         left    | right     | result
         100     | 100       | true
@@ -61,7 +64,7 @@ class BigDecimalUtilsShould extends Specification {
 
     def "test betweenIncluding"() {
         expect:
-        is(value).betweenIncluding(left, right) == result
+        amount(value).betweenIncluding(left, right) == result
         where:
         value   | left      | right     | result
         5       | 1         | 10        | true
@@ -72,9 +75,10 @@ class BigDecimalUtilsShould extends Specification {
         5       | 6         | 10        | false
         5       | 10        | 1         | false
     }
+
     def "test betweenExcluding"() {
         expect:
-        is(value).betweenExcluding(left, right) == result
+        amount(value).betweenExcluding(left, right) == result
         where:
         value   | left      | right     | result
         5       | 1         | 10        | true
@@ -84,6 +88,18 @@ class BigDecimalUtilsShould extends Specification {
         5       | 1         | 2         | false
         5       | 6         | 10        | false
         5       | 10        | 1         | false
+    }
+
+    def "test gtZero"() {
+        expect:
+        amount(value).gtZero() == result
+        where:
+        value     | result
+        100       | true
+        0         | false
+        0.01      | true
+        -1        | false
+        -0.01     | false
     }
 
 }

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.wandoo.homework.base.BigDecimalUtils.is;
+import static com.wandoo.homework.base.BigDecimalUtils.amount;
 
 public class LoanRequestBean {
     private Long id;
@@ -48,13 +48,13 @@ public class LoanRequestBean {
 
         if (this.getMainAmount() == null) {
             validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.CANNOT_BE_EMPTY, "mainAmount"));
-        } else if (!is(this.getMainAmount()).betweenIncluding(BigDecimal.ONE, new BigDecimal(1000))) {
+        } else if (!amount(this.getMainAmount()).betweenIncluding(BigDecimal.ONE, new BigDecimal(1000))) {
             validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.MAIN_AMOUNT_INCORRECT_FORMAT, "mainAmount"));
         }
 
         if (this.getInterestRate() == null) {
             validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.CANNOT_BE_EMPTY, "interestRate"));
-        } else if (!is(this.getInterestRate()).betweenIncluding(BigDecimal.ZERO, new BigDecimal(100))) {
+        } else if (!amount(this.getInterestRate()).betweenIncluding(BigDecimal.ZERO, new BigDecimal(100))) {
             validationErrors.add(new ValidationMessage(MessageType.ERROR, AppDefaults.INTEREST_RATE_INCORRECT_FORMAT, "interestRate"));
         }
 

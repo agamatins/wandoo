@@ -3,7 +3,9 @@ package unit
 import com.wandoo.homework.base.AppDefaults
 import com.wandoo.homework.requestbeans.PaymentRequestBean
 import spock.lang.Specification
+import spock.lang.Unroll
 
+@Unroll
 class PaymentRequestBeanShould extends Specification{
 
     def "request bean validation should contain all errors"() {

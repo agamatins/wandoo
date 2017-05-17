@@ -1,10 +1,11 @@
 package com.wandoo.homework.services;
 
+import com.wandoo.homework.base.AppDefaults;
 import com.wandoo.homework.beans.LoanBean;
-import com.wandoo.homework.requestbeans.LoanRequestBean;
 import com.wandoo.homework.exceptions.DuplicateObjectException;
 import com.wandoo.homework.model.Loan;
 import com.wandoo.homework.repositories.LoanRepository;
+import com.wandoo.homework.requestbeans.LoanRequestBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,12 +35,16 @@ public class LoanService {
 
     public void createLoan(LoanRequestBean loanRequestBean) throws DuplicateObjectException {
         if (loanRepository.get(loanRequestBean.getId()).isPresent()) {
-            throw new DuplicateObjectException(String.format("Loan with id=%s already exist",loanRequestBean.getId()));
+            throw new DuplicateObjectException(AppDefaults.LOAN_ID_ALREADY_EXIST);
         }
         loanRepository.createLoan(new Loan(loanRequestBean));
     }
 
     public Optional<LoanBean> get(Long id) {
         return loanRepository.get(id).map(Loan::toBean);
+    }
+
+    public Optional<LoanBean> getLast() {
+        return loanRepository.getLast().map(Loan::toBean);
     }
 }
