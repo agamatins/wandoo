@@ -10,9 +10,9 @@ POST: curl -i -H "Content-Type: application/json" -X POST -d '{$JSON}' $URL
 
 It's espected to get response containing 2 fields:
 body - containing expected object (or null)
-errors - list of errors and infos, each containing type [ERRROR, INFO, WARNING]
-                                                   field - which field to blame
-                                                   message - error message 
+errors - list of errors and infos, each containing type [ERRROR, INFO, WARNING]  
+                                                   field - which field to blame  
+                                                   message - error message                          
 
 <b>To execute on Windows:</b>  
 Get yourself SoapUI or stuff like that=) 
