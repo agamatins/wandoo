@@ -8,9 +8,10 @@ java -jar build/libs/wandoo-1.0.0.jar (or just run Application.java from your ID
 GET: curl -i -H "Content-Type: application/json" -X GET $URL  
 POST: curl -i -H "Content-Type: application/json" -X POST -d '{$JSON}' $URL  
 
-It's espected to get response containing 2 fields:
+It's expected to get response containing 2 fields:
 body - containing expected object (or null)
-errors - list of errors and infos, each containing type [ERRROR, INFO, WARNING]  
+errors - list of errors and infos, each containing   
+                                                   type [ERRROR, INFO, WARNING]  
                                                    field - which field to blame  
                                                    message - error message                          
 
