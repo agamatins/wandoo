@@ -12,7 +12,7 @@ import com.wandoo.homework.model.Loan;
 import com.wandoo.homework.repositories.CustomerRepository;
 import com.wandoo.homework.repositories.InvestmentRepository;
 import com.wandoo.homework.repositories.LoanRepository;
-import com.wandoo.homework.requestbeans.CustomerRequestBean;
+import com.wandoo.homework.requestbeans.RegisterCustomerRequestBean;
 import com.wandoo.homework.requestbeans.InvestmentRequestBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,15 +35,15 @@ public class CustomerService {
     @Autowired
     private InvestmentRepository investmentRepository;
 
-    public void registerCustomer(CustomerRequestBean customerRequestBean) throws DuplicateObjectException {
-        if (customerRepository.getByEmail(customerRequestBean.getEmail()).isPresent()) {
+    public void registerCustomer(RegisterCustomerRequestBean registerCustomerRequestBean) throws DuplicateObjectException {
+        if (customerRepository.getByEmail(registerCustomerRequestBean.getEmail()).isPresent()) {
             throw new DuplicateObjectException(AppDefaults.CUSTOMER_ALREADY_REGISTERED_WITH_EMAIL);
         }
 
         Customer customer = new Customer();
-        customer.setFirstName(customerRequestBean.getFirstName());
-        customer.setLastName(customerRequestBean.getLastName());
-        customer.setEmail(customerRequestBean.getEmail());
+        customer.setFirstName(registerCustomerRequestBean.getFirstName());
+        customer.setLastName(registerCustomerRequestBean.getLastName());
+        customer.setEmail(registerCustomerRequestBean.getEmail());
         customerRepository.createCustomer(customer);
     }
 

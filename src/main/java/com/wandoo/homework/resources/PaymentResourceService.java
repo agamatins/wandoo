@@ -6,7 +6,7 @@ import com.wandoo.homework.base.ValidationMessage;
 import com.wandoo.homework.beans.PaymentBean;
 import com.wandoo.homework.exceptions.DuplicateObjectException;
 import com.wandoo.homework.exceptions.LoanNotFoundException;
-import com.wandoo.homework.requestbeans.PaymentRequestBean;
+import com.wandoo.homework.requestbeans.ImportPaymentRequestBean;
 import com.wandoo.homework.responsebeans.BaseResponseBean;
 import com.wandoo.homework.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +23,14 @@ public class PaymentResourceService {
     private PaymentService paymentService;
 
     @Transactional
-    public BaseResponseBean importPayment(PaymentRequestBean paymentRequestBean) {
-        List<ValidationMessage> validationErrors = paymentRequestBean.validate();
+    public BaseResponseBean importPayment(ImportPaymentRequestBean importPaymentRequestBean) {
+        List<ValidationMessage> validationErrors = importPaymentRequestBean.validate();
         if (!validationErrors.isEmpty()) {
             return new BaseResponseBean(validationErrors);
         }
 
         try {
-            paymentService.createPayment(paymentRequestBean);
+            paymentService.createPayment(importPaymentRequestBean);
         } catch (DuplicateObjectException ex) {
             validationErrors.add(new ValidationMessage(MessageType.ERROR, ex.getMessage(), "id"));
             return new BaseResponseBean(validationErrors);

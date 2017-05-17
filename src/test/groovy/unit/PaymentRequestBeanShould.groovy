@@ -1,7 +1,7 @@
 package unit
 
 import com.wandoo.homework.base.AppDefaults
-import com.wandoo.homework.requestbeans.PaymentRequestBean
+import com.wandoo.homework.requestbeans.ImportPaymentRequestBean
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -10,7 +10,7 @@ class PaymentRequestBeanShould extends Specification{
 
     def "request bean validation should contain all errors"() {
         given:
-        def paymentRequestBean = new PaymentRequestBean()
+        def paymentRequestBean = new ImportPaymentRequestBean()
         paymentRequestBean.id = id
         paymentRequestBean.loanId = loanId
         paymentRequestBean.mainAmount = mainAmount
@@ -94,7 +94,7 @@ class PaymentRequestBeanShould extends Specification{
     }
 
     def getValidationMessage(Long id, Long loanId, BigDecimal mainAmount, BigDecimal interestAmount) {
-        def paymentRequestBean = new PaymentRequestBean()
+        def paymentRequestBean = new ImportPaymentRequestBean()
         paymentRequestBean.id = id
         paymentRequestBean.loanId = loanId
         paymentRequestBean.mainAmount = mainAmount

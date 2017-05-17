@@ -1,6 +1,6 @@
 package com.wandoo.homework.resources;
 
-import com.wandoo.homework.requestbeans.CustomerRequestBean;
+import com.wandoo.homework.requestbeans.RegisterCustomerRequestBean;
 import com.wandoo.homework.requestbeans.InvestmentRequestBean;
 import com.wandoo.homework.responsebeans.BaseResponseBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,8 @@ public class CustomerResource {
     private CustomerResourceService customerResourceService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public BaseResponseBean createLoan(@RequestBody CustomerRequestBean customerRequestBean) {
-        return customerResourceService.registerCustomer(customerRequestBean);
+    public BaseResponseBean createLoan(@RequestBody RegisterCustomerRequestBean registerCustomerRequestBean) {
+        return customerResourceService.registerCustomer(registerCustomerRequestBean);
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)

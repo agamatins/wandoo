@@ -5,7 +5,7 @@ import com.wandoo.homework.base.MessageType;
 import com.wandoo.homework.base.ValidationMessage;
 import com.wandoo.homework.beans.LoanBean;
 import com.wandoo.homework.exceptions.DuplicateObjectException;
-import com.wandoo.homework.requestbeans.LoanRequestBean;
+import com.wandoo.homework.requestbeans.ImportLoanRequestBean;
 import com.wandoo.homework.responsebeans.BaseResponseBean;
 import com.wandoo.homework.services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +22,14 @@ public class LoanResourceService {
     private LoanService loanService;
 
     @Transactional
-    public BaseResponseBean importLoan(LoanRequestBean loanRequestBean) {
-        List<ValidationMessage> validationErrors = loanRequestBean.validate();
+    public BaseResponseBean importLoan(ImportLoanRequestBean importLoanRequestBean) {
+        List<ValidationMessage> validationErrors = importLoanRequestBean.validate();
         if (!validationErrors.isEmpty()) {
             return new BaseResponseBean(validationErrors);
         }
 
         try {
-            loanService.createLoan(loanRequestBean);
+            loanService.createLoan(importLoanRequestBean);
         } catch (DuplicateObjectException ex) {
             validationErrors.add(new ValidationMessage(MessageType.ERROR, ex.getMessage(),"id"));
             return new BaseResponseBean(validationErrors);

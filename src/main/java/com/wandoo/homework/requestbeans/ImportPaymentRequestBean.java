@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.wandoo.homework.base.BigDecimalUtils.amount;
 
-public class PaymentRequestBean {
+public class ImportPaymentRequestBean {
 
     private Long id;
     private Long loanId;

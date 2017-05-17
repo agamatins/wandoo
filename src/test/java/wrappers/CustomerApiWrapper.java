@@ -2,7 +2,7 @@ package wrappers;
 
 
 import com.wandoo.homework.beans.CustomerBean;
-import com.wandoo.homework.requestbeans.CustomerRequestBean;
+import com.wandoo.homework.requestbeans.RegisterCustomerRequestBean;
 import com.wandoo.homework.requestbeans.InvestmentRequestBean;
 import com.wandoo.homework.responsebeans.BaseResponseBean;
 
@@ -18,7 +18,7 @@ public class CustomerApiWrapper extends BaseApiWrapper{
         super.localPort = localPort;
     }
 
-    public BaseResponseBean registerCustomer(CustomerRequestBean bean) {
+    public BaseResponseBean registerCustomer(RegisterCustomerRequestBean bean) {
         Client client = ClientBuilder.newClient();
         WebTarget webTarget = client.target(getTarget("customer")).path("register");
 

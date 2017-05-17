@@ -1,7 +1,7 @@
 package wrappers;
 
 import com.wandoo.homework.beans.LoanBean;
-import com.wandoo.homework.requestbeans.LoanRequestBean;
+import com.wandoo.homework.requestbeans.ImportLoanRequestBean;
 import com.wandoo.homework.responsebeans.BaseResponseBean;
 
 import javax.ws.rs.client.Client;
@@ -17,7 +17,7 @@ public class LoanApiWrapper extends BaseApiWrapper{
         super.localPort = localPort;
     }
 
-    public BaseResponseBean importLoan(LoanRequestBean bean) {
+    public BaseResponseBean importLoan(ImportLoanRequestBean bean) {
         Client client = ClientBuilder.newClient();
         WebTarget webTarget = client.target(getTarget("loan")).path("import");
 

@@ -1,6 +1,6 @@
 package com.wandoo.homework.resources;
 
-import com.wandoo.homework.requestbeans.PaymentRequestBean;
+import com.wandoo.homework.requestbeans.ImportPaymentRequestBean;
 import com.wandoo.homework.responsebeans.BaseResponseBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +13,8 @@ public class PaymentResource {
     private PaymentResourceService paymentResourceService;
 
     @RequestMapping(value = "/import", method = RequestMethod.POST)
-    public BaseResponseBean createLoan(@RequestBody PaymentRequestBean paymentRequestBean) {
-        return paymentResourceService.importPayment(paymentRequestBean);
+    public BaseResponseBean createLoan(@RequestBody ImportPaymentRequestBean importPaymentRequestBean) {
+        return paymentResourceService.importPayment(importPaymentRequestBean);
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)

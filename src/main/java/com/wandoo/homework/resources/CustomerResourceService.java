@@ -8,7 +8,7 @@ import com.wandoo.homework.exceptions.CustomerNotFoundException;
 import com.wandoo.homework.exceptions.DuplicateObjectException;
 import com.wandoo.homework.exceptions.FailedInvestmentException;
 import com.wandoo.homework.exceptions.LoanNotFoundException;
-import com.wandoo.homework.requestbeans.CustomerRequestBean;
+import com.wandoo.homework.requestbeans.RegisterCustomerRequestBean;
 import com.wandoo.homework.requestbeans.InvestmentRequestBean;
 import com.wandoo.homework.responsebeans.BaseResponseBean;
 import com.wandoo.homework.services.CustomerService;
@@ -26,14 +26,14 @@ public class CustomerResourceService {
     private CustomerService customerService;
 
     @Transactional
-    public BaseResponseBean registerCustomer(CustomerRequestBean customerRequestBean) {
-        List<ValidationMessage> validationErrors = customerRequestBean.validate();
+    public BaseResponseBean registerCustomer(RegisterCustomerRequestBean registerCustomerRequestBean) {
+        List<ValidationMessage> validationErrors = registerCustomerRequestBean.validate();
         if (!validationErrors.isEmpty()) {
             return new BaseResponseBean(validationErrors);
         }
 
         try {
-            customerService.registerCustomer(customerRequestBean);
+            customerService.registerCustomer(registerCustomerRequestBean);
         } catch (DuplicateObjectException ex) {
             validationErrors.add(new ValidationMessage(MessageType.ERROR, ex.getMessage(), "email"));
             return new BaseResponseBean(validationErrors);

@@ -12,6 +12,4 @@ public interface LoanRepository {
     List<Loan> getAll();
 
     Optional<Loan> get(Long id);
-
-    Optional<Loan> getLast();
 }

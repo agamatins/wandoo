@@ -34,14 +34,4 @@ public class LoanRepositoryImpl implements LoanRepository {
     public Optional<Loan> get(Long id) {
         return Optional.ofNullable(entityManager.find(Loan.class, id));
     }
-
-    @Override
-    public Optional<Loan> getLast() {
-        Loan loan = (Loan)entityManager.unwrap(Session.class)
-                .createCriteria(Loan.class)
-                .addOrder(Order.desc("id"))
-                .setMaxResults(1)
-                .uniqueResult();
-        return Optional.ofNullable(loan);
-    }
 }

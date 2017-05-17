@@ -20,14 +20,4 @@ public class InvestmentRepositoryImpl implements InvestmentRepository {
     public void createInvestment(Investment investment) {
         entityManager.unwrap(Session.class).save(investment);
     }
-
-    @Override
-    public Optional<Investment> getLastCreated() {
-        Investment investment = (Investment)entityManager.unwrap(Session.class)
-                .createCriteria(Investment.class)
-                .addOrder(Order.desc("id"))
-                .setMaxResults(1)
-                .uniqueResult();
-        return Optional.ofNullable(investment);
-    }
 }

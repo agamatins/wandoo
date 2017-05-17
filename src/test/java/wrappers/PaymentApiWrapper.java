@@ -1,7 +1,7 @@
 package wrappers;
 
 import com.wandoo.homework.beans.PaymentBean;
-import com.wandoo.homework.requestbeans.PaymentRequestBean;
+import com.wandoo.homework.requestbeans.ImportPaymentRequestBean;
 import com.wandoo.homework.responsebeans.BaseResponseBean;
 
 import javax.ws.rs.client.Client;
@@ -16,7 +16,7 @@ public class PaymentApiWrapper extends BaseApiWrapper{
         super.localPort = localPort;
     }
 
-    public BaseResponseBean importPayment(PaymentRequestBean bean) {
+    public BaseResponseBean importPayment(ImportPaymentRequestBean bean) {
         Client client = ClientBuilder.newClient();
         WebTarget webTarget = client.target(getTarget("payment")).path("import");
 

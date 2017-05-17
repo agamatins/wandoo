@@ -1,9 +1,9 @@
 package helpers
 
-import com.wandoo.homework.requestbeans.CustomerRequestBean
+import com.wandoo.homework.requestbeans.RegisterCustomerRequestBean
 import com.wandoo.homework.requestbeans.InvestmentRequestBean
-import com.wandoo.homework.requestbeans.LoanRequestBean
-import com.wandoo.homework.requestbeans.PaymentRequestBean
+import com.wandoo.homework.requestbeans.ImportLoanRequestBean
+import com.wandoo.homework.requestbeans.ImportPaymentRequestBean
 import spock.lang.Specification
 import wrappers.CustomerApiWrapper
 import wrappers.LoanApiWrapper
@@ -24,7 +24,7 @@ class TestBaseSpec extends Specification {
     final LOAN_INTEREST_RATE = new BigDecimal(5.5)
 
     def registerCustomerAndGetResponse(CustomerApiWrapper customerApiWrapper) {
-        def customerRequestBean = new CustomerRequestBean()
+        def customerRequestBean = new RegisterCustomerRequestBean()
         customerRequestBean.email = EMAIL
         customerRequestBean.firstName = FIRST_NAME
         customerRequestBean.lastName = LAST_NAME
@@ -33,7 +33,7 @@ class TestBaseSpec extends Specification {
     }
 
     def importLoanAndGetResponse(LoanApiWrapper loanApiWrapper) {
-        def loanRequestBean = new LoanRequestBean()
+        def loanRequestBean = new ImportLoanRequestBean()
         loanRequestBean.setId(LOAN_ID)
         loanRequestBean.setMainAmount(LOAN_MAIN_AMOUNT)
         loanRequestBean.setInterestRate(LOAN_INTEREST_RATE)
@@ -42,7 +42,7 @@ class TestBaseSpec extends Specification {
     }
 
     def importLoanWithIdAndAmountAndGetResponse(LoanApiWrapper loanApiWrapper, Long id, BigDecimal mainAmount) {
-        def loanRequestBean = new LoanRequestBean()
+        def loanRequestBean = new ImportLoanRequestBean()
         loanRequestBean.setId(id)
         loanRequestBean.setMainAmount(mainAmount)
         loanRequestBean.setInterestRate(LOAN_INTEREST_RATE)
@@ -51,7 +51,7 @@ class TestBaseSpec extends Specification {
     }
 
     def importPaymentAndGetResponse(PaymentApiWrapper paymentApiWrapper, Long id, BigDecimal mainAmount) {
-        def paymentRequestBean = new PaymentRequestBean()
+        def paymentRequestBean = new ImportPaymentRequestBean()
         paymentRequestBean.setId(id)
         paymentRequestBean.setLoanId(LOAN_ID)
         paymentRequestBean.setMainAmount(mainAmount)
@@ -61,7 +61,7 @@ class TestBaseSpec extends Specification {
     }
 
     def importPaymentForLoanAndGetResponse(PaymentApiWrapper paymentApiWrapper, Long id, Long loanId, BigDecimal mainAmount) {
-        def paymentRequestBean = new PaymentRequestBean()
+        def paymentRequestBean = new ImportPaymentRequestBean()
         paymentRequestBean.setId(id)
         paymentRequestBean.setLoanId(loanId)
         paymentRequestBean.setMainAmount(mainAmount)

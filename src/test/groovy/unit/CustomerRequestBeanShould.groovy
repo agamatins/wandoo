@@ -1,7 +1,7 @@
 package unit
 
 import com.wandoo.homework.base.AppDefaults
-import com.wandoo.homework.requestbeans.CustomerRequestBean
+import com.wandoo.homework.requestbeans.RegisterCustomerRequestBean
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -10,7 +10,7 @@ class CustomerRequestBeanShould extends Specification{
 
     def "request bean validation should contain all errors"() {
         given:
-            def customerRequesBean = new CustomerRequestBean()
+            def customerRequesBean = new RegisterCustomerRequestBean()
             customerRequesBean.email = email
             customerRequesBean.firstName = firstName
             customerRequesBean.lastName = lastName
@@ -102,7 +102,7 @@ class CustomerRequestBeanShould extends Specification{
 
 
     def getValidationMessage(String firstName, String lastName, String email) {
-        def customerRequestBean = new CustomerRequestBean()
+        def customerRequestBean = new RegisterCustomerRequestBean()
         customerRequestBean.firstName = firstName
         customerRequestBean.lastName = lastName
         customerRequestBean.email = email

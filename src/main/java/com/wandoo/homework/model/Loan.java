@@ -1,7 +1,7 @@
 package com.wandoo.homework.model;
 
 import com.wandoo.homework.beans.LoanBean;
-import com.wandoo.homework.requestbeans.LoanRequestBean;
+import com.wandoo.homework.requestbeans.ImportLoanRequestBean;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -36,10 +36,10 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(LoanRequestBean loanRequestBean) {
-        this.id = loanRequestBean.getId();
-        this.mainAmount = loanRequestBean.getMainAmount().setScale(2, RoundingMode.HALF_UP);
-        this.interestRate = loanRequestBean.getInterestRate().setScale(2, RoundingMode.HALF_UP);
+    public Loan(ImportLoanRequestBean importLoanRequestBean) {
+        this.id = importLoanRequestBean.getId();
+        this.mainAmount = importLoanRequestBean.getMainAmount().setScale(2, RoundingMode.HALF_UP);
+        this.interestRate = importLoanRequestBean.getInterestRate().setScale(2, RoundingMode.HALF_UP);
     }
 
     public Loan(Long id,
