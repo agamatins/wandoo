@@ -1,4 +1,4 @@
-package com.wandoo.homework.resources;
+package com.wandoo.homework.rest.resources;
 
 import com.wandoo.homework.requestbeans.RegisterCustomerRequestBean;
 import com.wandoo.homework.requestbeans.InvestmentRequestBean;

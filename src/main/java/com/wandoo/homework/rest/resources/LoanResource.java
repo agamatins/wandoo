@@ -1,4 +1,4 @@
-package com.wandoo.homework.resources;
+package com.wandoo.homework.rest.resources;
 
 import com.wandoo.homework.requestbeans.ImportLoanRequestBean;
 import com.wandoo.homework.responsebeans.BaseResponseBean;

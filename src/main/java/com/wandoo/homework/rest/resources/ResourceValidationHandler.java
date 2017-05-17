@@ -1,4 +1,4 @@
-package com.wandoo.homework.resources;
+package com.wandoo.homework.rest.resources;
 
 import com.wandoo.homework.base.MessageType;
 import com.wandoo.homework.base.ValidationMessage;
