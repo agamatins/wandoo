@@ -22,7 +22,7 @@ Get yourself SoapUI or stuff like that=)
 
 **To register customer:**   
 URL: POST http://localhost:8080/customer/register  
-params: 
+params:    
 firstName : String (Mandatory) cannot be longer than 16 symbols,
                                should contain only latin letters, spaces and symbols ' and -  
 lastName : String (Mandatory) cannot be longer than 16 symbols,
@@ -34,7 +34,7 @@ Except of above mentioned requirements following validation rules are applied:
 
 **To import loan:**   
 URL: POST http://localhost:8080/loan/import  
-params: 
+params:   
 id : Long (Mandatory) - provided by external loan issuing company  
 mainAmount : Numeric (Mandatory) should be from 1 to 1000   
 interestRate : Numeric (Mandatory), should be from 0 to 100  
@@ -44,7 +44,7 @@ Except of above mentioned requirements following validation rules are applied:
   
 **To import payment:**   
 URL: POST http://localhost:8080/payment/import  
-params: 
+params:   
 id : Long (Mandatory) - provided by external loan issuing company  
 loanId: Long (Mandatory) - provided by external loan issuing company
 mainAmount : Numeric (Mandatory) should be from 1 to 1000   
@@ -61,9 +61,9 @@ Availability calculated based on main amount, payments and investments being don
 
 **To invest into loans:**   
 URL: POST http://localhost:8080/customer/invest  
-params: 
-loanId: Long (Mandatory)
-customerId: Long (Mandatory)
+params:   
+loanId: Long (Mandatory)   
+customerId: Long (Mandatory)  
 amount : Numeric (Mandatory) should be from 1 to 1000    
 
 Except of above mentioned requirements following validation rules are applied: 
@@ -73,3 +73,5 @@ Except of above mentioned requirements following validation rules are applied:
   - If investment amount is bigger than amount available for 
         investment - only this available sum will be investment
            (assuming in real system remaining amount to return to customer's account)
+           
+No UI, sorry=(
