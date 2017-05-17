@@ -23,11 +23,6 @@ public class CustomerResource {
         return customerResourceService.get(id);
     }
 
-    @RequestMapping(value = "/get-by-email/{email}", method = RequestMethod.GET)
-    public BaseResponseBean getByEmail(@PathVariable("email") String email) {
-        return customerResourceService.getByEmail(email);
-    }
-
     @RequestMapping(value = "/get-last", method = RequestMethod.GET)
     public BaseResponseBean get() {
         return customerResourceService.getLastRegistered();

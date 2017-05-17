@@ -53,17 +53,6 @@ public class CustomerResourceService {
     }
 
     @Transactional(readOnly = true)
-    public BaseResponseBean getByEmail(String email) {
-        Optional<CustomerBean> customerBean = customerService.getByEmail(email);
-        if (!customerBean.isPresent()) {
-            return new BaseResponseBean(new ValidationMessage(MessageType.INFO, AppDefaults.NOT_FOUND, "email"));
-        }
-        BaseResponseBean<CustomerBean> responseBean = new BaseResponseBean<>();
-        responseBean.setBody(customerBean.get());
-        return responseBean;
-    }
-
-    @Transactional(readOnly = true)
     public BaseResponseBean getLastRegistered() {
         Optional<CustomerBean> customerBean = customerService.getLastRegistered();
         if (!customerBean.isPresent()) {
