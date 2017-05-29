@@ -262,7 +262,7 @@ class InvestmentTest extends TestBaseSpec {
         then:
         !investmentResponse.errors.isEmpty()
         investmentResponse.errors.get(0).message == AppDefaults.CANNOT_FIND_LOAN_ID
-        investmentResponse.errors.get(0).field == "loanId"
+        investmentResponse.errors.get(0).field == ""
     }
 
     def "cannot invest for unregistered customer"() {
@@ -273,7 +273,7 @@ class InvestmentTest extends TestBaseSpec {
         then:
         !investmentResponse.errors.isEmpty()
         investmentResponse.errors.get(0).message == AppDefaults.CANNOT_FIND_CUSTOMER_ID
-        investmentResponse.errors.get(0).field == "customerId"
+        investmentResponse.errors.get(0).field == ""
     }
 
     def "cannot invest in uninvestable loan"() {
@@ -286,7 +286,7 @@ class InvestmentTest extends TestBaseSpec {
         then:
         !investmentResponse.errors.isEmpty()
         investmentResponse.errors.get(0).message == AppDefaults.LOAN_NOT_INVESTABLE
-        investmentResponse.errors.get(0).field == "amount"
+        investmentResponse.errors.get(0).field == ""
     }
 
 }

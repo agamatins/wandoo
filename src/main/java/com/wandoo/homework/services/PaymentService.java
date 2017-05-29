@@ -1,14 +1,12 @@
 package com.wandoo.homework.services;
 
 import com.wandoo.homework.base.AppDefaults;
-import com.wandoo.homework.beans.PaymentBean;
-import com.wandoo.homework.exceptions.DuplicateObjectException;
-import com.wandoo.homework.exceptions.LoanNotFoundException;
 import com.wandoo.homework.model.Loan;
 import com.wandoo.homework.model.Payment;
+import com.wandoo.homework.model.beans.PaymentBean;
+import com.wandoo.homework.model.requestbeans.ImportPaymentRequestBean;
 import com.wandoo.homework.repositories.LoanRepository;
 import com.wandoo.homework.repositories.PaymentRepository;
-import com.wandoo.homework.requestbeans.ImportPaymentRequestBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,14 +22,14 @@ public class PaymentService {
     @Autowired
     private LoanRepository loanRepository;
 
-    public void createPayment(ImportPaymentRequestBean importPaymentRequestBean) throws LoanNotFoundException, DuplicateObjectException{
+    public void createPayment(ImportPaymentRequestBean importPaymentRequestBean) throws Exception{
         if (paymentRepository.get(importPaymentRequestBean.getId()).isPresent()) {
-            throw new DuplicateObjectException(AppDefaults.PAYMENT_ID_ALREADY_EXIST);
+            throw new Exception(AppDefaults.PAYMENT_ID_ALREADY_EXIST);
         }
 
         Optional<Loan> loan = loanRepository.get(importPaymentRequestBean.getLoanId());
         if (!loan.isPresent()) {
-            throw new LoanNotFoundException(AppDefaults.CANNOT_FIND_LOAN_ID);
+            throw new Exception(AppDefaults.CANNOT_FIND_LOAN_ID);
         }
         Payment payment = new Payment();
         payment.setId(importPaymentRequestBean.getId());

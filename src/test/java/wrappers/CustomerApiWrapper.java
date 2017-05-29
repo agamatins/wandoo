@@ -1,10 +1,10 @@
 package wrappers;
 
 
-import com.wandoo.homework.beans.CustomerBean;
-import com.wandoo.homework.requestbeans.RegisterCustomerRequestBean;
-import com.wandoo.homework.requestbeans.InvestmentRequestBean;
-import com.wandoo.homework.responsebeans.BaseResponseBean;
+import com.wandoo.homework.model.beans.CustomerBean;
+import com.wandoo.homework.model.requestbeans.InvestmentRequestBean;
+import com.wandoo.homework.model.requestbeans.RegisterCustomerRequestBean;
+import com.wandoo.homework.model.responsebeans.BaseResponseBean;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;

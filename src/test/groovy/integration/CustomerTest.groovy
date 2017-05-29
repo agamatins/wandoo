@@ -51,6 +51,6 @@ class CustomerTest extends TestBaseSpec{
         then:
         registerResponse.errors.size() == 1
         registerResponse.errors.get(0).message == AppDefaults.CUSTOMER_ALREADY_REGISTERED_WITH_EMAIL
-        registerResponse.errors.get(0).field == "email"
+        registerResponse.errors.get(0).field == ""
     }
 }

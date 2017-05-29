@@ -1,7 +1,7 @@
 package com.wandoo.homework.rest.resources;
 
-import com.wandoo.homework.requestbeans.ImportLoanRequestBean;
-import com.wandoo.homework.responsebeans.BaseResponseBean;
+import com.wandoo.homework.model.requestbeans.ImportLoanRequestBean;
+import com.wandoo.homework.model.responsebeans.BaseResponseBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

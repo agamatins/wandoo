@@ -1,6 +1,6 @@
 package com.wandoo.homework.model;
 
-import com.wandoo.homework.beans.CustomerBean;
+import com.wandoo.homework.model.beans.CustomerBean;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;

@@ -12,13 +12,13 @@ import javax.persistence.EntityManager;
 import java.util.Optional;
 
 @Repository
-public class CustomerRepositoryImpl implements CustomerRepository {
+public class DefaultCustomerRepository implements CustomerRepository {
     @Autowired
     private EntityManager entityManager;
 
     @Override
     public void createCustomer(Customer customer) {
-        entityManager.unwrap(Session.class).save(customer);
+        entityManager.persist(customer);
     }
 
     @Override

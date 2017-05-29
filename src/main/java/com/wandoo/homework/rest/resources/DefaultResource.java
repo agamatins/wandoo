@@ -2,7 +2,7 @@ package com.wandoo.homework.rest.resources;
 
 import com.wandoo.homework.base.MessageType;
 import com.wandoo.homework.base.ValidationMessage;
-import com.wandoo.homework.responsebeans.BaseResponseBean;
+import com.wandoo.homework.model.responsebeans.BaseResponseBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,8 +1,8 @@
 package com.wandoo.homework.rest.resources;
 
-import com.wandoo.homework.requestbeans.RegisterCustomerRequestBean;
-import com.wandoo.homework.requestbeans.InvestmentRequestBean;
-import com.wandoo.homework.responsebeans.BaseResponseBean;
+import com.wandoo.homework.model.requestbeans.InvestmentRequestBean;
+import com.wandoo.homework.model.requestbeans.RegisterCustomerRequestBean;
+import com.wandoo.homework.model.responsebeans.BaseResponseBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

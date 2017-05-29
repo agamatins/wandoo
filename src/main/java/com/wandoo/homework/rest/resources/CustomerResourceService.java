@@ -3,14 +3,10 @@ package com.wandoo.homework.rest.resources;
 import com.wandoo.homework.base.AppDefaults;
 import com.wandoo.homework.base.MessageType;
 import com.wandoo.homework.base.ValidationMessage;
-import com.wandoo.homework.beans.CustomerBean;
-import com.wandoo.homework.exceptions.CustomerNotFoundException;
-import com.wandoo.homework.exceptions.DuplicateObjectException;
-import com.wandoo.homework.exceptions.FailedInvestmentException;
-import com.wandoo.homework.exceptions.LoanNotFoundException;
-import com.wandoo.homework.requestbeans.RegisterCustomerRequestBean;
-import com.wandoo.homework.requestbeans.InvestmentRequestBean;
-import com.wandoo.homework.responsebeans.BaseResponseBean;
+import com.wandoo.homework.model.beans.CustomerBean;
+import com.wandoo.homework.model.requestbeans.InvestmentRequestBean;
+import com.wandoo.homework.model.requestbeans.RegisterCustomerRequestBean;
+import com.wandoo.homework.model.responsebeans.BaseResponseBean;
 import com.wandoo.homework.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,8 +30,8 @@ public class CustomerResourceService {
 
         try {
             customerService.registerCustomer(registerCustomerRequestBean);
-        } catch (DuplicateObjectException ex) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, ex.getMessage(), "email"));
+        } catch (Exception ex) {
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, ex.getMessage(), ""));
             return new BaseResponseBean(validationErrors);
         }
         return new BaseResponseBean();
@@ -72,14 +68,8 @@ public class CustomerResourceService {
 
         try {
             customerService.invest(investmentRequestBean);
-        } catch (FailedInvestmentException fie) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, fie.getMessage(), "amount"));
-            return new BaseResponseBean(validationErrors);
-        } catch (LoanNotFoundException lnfe) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, lnfe.getMessage(), "loanId"));
-            return new BaseResponseBean(validationErrors);
-        } catch (CustomerNotFoundException cnfe) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, cnfe.getMessage(), "customerId"));
+        } catch (Exception e) {
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, e.getMessage(), ""));
             return new BaseResponseBean(validationErrors);
         }
         return new BaseResponseBean();

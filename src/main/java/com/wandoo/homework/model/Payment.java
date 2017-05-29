@@ -1,6 +1,7 @@
 package com.wandoo.homework.model;
 
-import com.wandoo.homework.beans.PaymentBean;
+
+import com.wandoo.homework.model.beans.PaymentBean;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package com.wandoo.homework.beans;
+package com.wandoo.homework.model.beans;
 
 import java.math.BigDecimal;
 

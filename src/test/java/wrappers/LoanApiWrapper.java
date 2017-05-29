@@ -1,8 +1,9 @@
 package wrappers;
 
-import com.wandoo.homework.beans.LoanBean;
-import com.wandoo.homework.requestbeans.ImportLoanRequestBean;
-import com.wandoo.homework.responsebeans.BaseResponseBean;
+
+import com.wandoo.homework.model.beans.LoanBean;
+import com.wandoo.homework.model.requestbeans.ImportLoanRequestBean;
+import com.wandoo.homework.model.responsebeans.BaseResponseBean;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;

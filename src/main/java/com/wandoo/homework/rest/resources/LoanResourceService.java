@@ -3,10 +3,9 @@ package com.wandoo.homework.rest.resources;
 import com.wandoo.homework.base.AppDefaults;
 import com.wandoo.homework.base.MessageType;
 import com.wandoo.homework.base.ValidationMessage;
-import com.wandoo.homework.beans.LoanBean;
-import com.wandoo.homework.exceptions.DuplicateObjectException;
-import com.wandoo.homework.requestbeans.ImportLoanRequestBean;
-import com.wandoo.homework.responsebeans.BaseResponseBean;
+import com.wandoo.homework.model.beans.LoanBean;
+import com.wandoo.homework.model.requestbeans.ImportLoanRequestBean;
+import com.wandoo.homework.model.responsebeans.BaseResponseBean;
 import com.wandoo.homework.services.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,8 +29,8 @@ public class LoanResourceService {
 
         try {
             loanService.createLoan(importLoanRequestBean);
-        } catch (DuplicateObjectException ex) {
-            validationErrors.add(new ValidationMessage(MessageType.ERROR, ex.getMessage(),"id"));
+        } catch (Exception ex) {
+            validationErrors.add(new ValidationMessage(MessageType.ERROR, ex.getMessage(),""));
             return new BaseResponseBean(validationErrors);
         }
         return new BaseResponseBean();
@@ -55,7 +54,7 @@ public class LoanResourceService {
     public BaseResponseBean get(Long id) {
         Optional<LoanBean> loanBean = loanService.get(id);
         if (!loanBean.isPresent()) {
-            return new BaseResponseBean(new ValidationMessage(MessageType.INFO, AppDefaults.NOT_FOUND, "id"));
+            return new BaseResponseBean(new ValidationMessage(MessageType.INFO, AppDefaults.NOT_FOUND, ""));
         }
         BaseResponseBean<LoanBean> responseBean = new BaseResponseBean<>();
         responseBean.setBody(loanBean.get());

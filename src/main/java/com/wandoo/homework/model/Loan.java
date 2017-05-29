@@ -1,7 +1,7 @@
 package com.wandoo.homework.model;
 
-import com.wandoo.homework.beans.LoanBean;
-import com.wandoo.homework.requestbeans.ImportLoanRequestBean;
+import com.wandoo.homework.model.beans.LoanBean;
+import com.wandoo.homework.model.requestbeans.ImportLoanRequestBean;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 

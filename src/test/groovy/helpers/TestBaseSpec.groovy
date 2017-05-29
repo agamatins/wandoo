@@ -1,9 +1,9 @@
 package helpers
 
-import com.wandoo.homework.requestbeans.RegisterCustomerRequestBean
-import com.wandoo.homework.requestbeans.InvestmentRequestBean
-import com.wandoo.homework.requestbeans.ImportLoanRequestBean
-import com.wandoo.homework.requestbeans.ImportPaymentRequestBean
+import com.wandoo.homework.model.requestbeans.ImportLoanRequestBean
+import com.wandoo.homework.model.requestbeans.ImportPaymentRequestBean
+import com.wandoo.homework.model.requestbeans.InvestmentRequestBean
+import com.wandoo.homework.model.requestbeans.RegisterCustomerRequestBean
 import spock.lang.Specification
 import wrappers.CustomerApiWrapper
 import wrappers.LoanApiWrapper

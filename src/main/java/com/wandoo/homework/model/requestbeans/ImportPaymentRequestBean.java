@@ -1,4 +1,4 @@
-package com.wandoo.homework.requestbeans;
+package com.wandoo.homework.model.requestbeans;
 
 import com.wandoo.homework.base.AppDefaults;
 import com.wandoo.homework.base.MessageType;

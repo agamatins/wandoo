@@ -1,4 +1,4 @@
-package com.wandoo.homework.responsebeans;
+package com.wandoo.homework.model.responsebeans;
 
 import com.wandoo.homework.base.ValidationMessage;
 

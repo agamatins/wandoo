@@ -69,7 +69,7 @@ class PaymentTest extends TestBaseSpec{
         then:
         !importPaymentResponse.errors.isEmpty()
         importPaymentResponse.errors.get(0).message == AppDefaults.CANNOT_FIND_LOAN_ID
-        importPaymentResponse.errors.get(0).field == "loanId"
+        importPaymentResponse.errors.get(0).field == ""
     }
 
     def "cannot import payment with the same id"() {
@@ -81,7 +81,7 @@ class PaymentTest extends TestBaseSpec{
         then:
         !importPaymentResponse.errors.isEmpty()
         importPaymentResponse.errors.get(0).message == AppDefaults.PAYMENT_ID_ALREADY_EXIST
-        importPaymentResponse.errors.get(0).field == "id"
+        importPaymentResponse.errors.get(0).field == ""
     }
 
     def "cannot get unexisting payment"() {
@@ -92,6 +92,6 @@ class PaymentTest extends TestBaseSpec{
         paymentResponse.body == null
         !paymentResponse.errors.isEmpty()
         paymentResponse.errors.get(0).message == AppDefaults.NOT_FOUND
-        paymentResponse.errors.get(0).field == "id"
+        paymentResponse.errors.get(0).field == ""
     }
 }

@@ -1,19 +1,15 @@
 package com.wandoo.homework.services;
 
 import com.wandoo.homework.base.AppDefaults;
-import com.wandoo.homework.beans.CustomerBean;
-import com.wandoo.homework.exceptions.CustomerNotFoundException;
-import com.wandoo.homework.exceptions.DuplicateObjectException;
-import com.wandoo.homework.exceptions.FailedInvestmentException;
-import com.wandoo.homework.exceptions.LoanNotFoundException;
 import com.wandoo.homework.model.Customer;
 import com.wandoo.homework.model.Investment;
 import com.wandoo.homework.model.Loan;
+import com.wandoo.homework.model.beans.CustomerBean;
+import com.wandoo.homework.model.requestbeans.InvestmentRequestBean;
+import com.wandoo.homework.model.requestbeans.RegisterCustomerRequestBean;
 import com.wandoo.homework.repositories.CustomerRepository;
 import com.wandoo.homework.repositories.InvestmentRepository;
 import com.wandoo.homework.repositories.LoanRepository;
-import com.wandoo.homework.requestbeans.RegisterCustomerRequestBean;
-import com.wandoo.homework.requestbeans.InvestmentRequestBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,9 +31,9 @@ public class CustomerService {
     @Autowired
     private InvestmentRepository investmentRepository;
 
-    public void registerCustomer(RegisterCustomerRequestBean registerCustomerRequestBean) throws DuplicateObjectException {
+    public void registerCustomer(RegisterCustomerRequestBean registerCustomerRequestBean) throws Exception {
         if (customerRepository.getByEmail(registerCustomerRequestBean.getEmail()).isPresent()) {
-            throw new DuplicateObjectException(AppDefaults.CUSTOMER_ALREADY_REGISTERED_WITH_EMAIL);
+            throw new Exception(AppDefaults.CUSTOMER_ALREADY_REGISTERED_WITH_EMAIL);
         }
 
         Customer customer = new Customer();
@@ -59,19 +55,19 @@ public class CustomerService {
         return customerRepository.getByEmail(email).map(Customer::toBean);
     }
 
-    public void invest(InvestmentRequestBean investmentRequestBean) throws CustomerNotFoundException, LoanNotFoundException, FailedInvestmentException {
+    public void invest(InvestmentRequestBean investmentRequestBean) throws Exception {
         Optional<Customer> customer = customerRepository.get(investmentRequestBean.getCustomerId());
         if (!customer.isPresent()) {
-            throw new CustomerNotFoundException(AppDefaults.CANNOT_FIND_CUSTOMER_ID);
+            throw new Exception(AppDefaults.CANNOT_FIND_CUSTOMER_ID);
         }
 
         Optional<Loan> loan = loanRepository.get(investmentRequestBean.getLoanId());
         if (!loan.isPresent()) {
-            throw new LoanNotFoundException(AppDefaults.CANNOT_FIND_LOAN_ID);
+            throw new Exception(AppDefaults.CANNOT_FIND_LOAN_ID);
         }
 
         if (!loan.get().isInvestable()) {
-            throw new FailedInvestmentException(AppDefaults.LOAN_NOT_INVESTABLE);
+            throw new Exception(AppDefaults.LOAN_NOT_INVESTABLE);
         }
 
         BigDecimal investableAmount = getActualInvestmentAmount(investmentRequestBean.getAmount(), loan.get().getAllowedInvestmentAmount());

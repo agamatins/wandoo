@@ -50,7 +50,7 @@ class LoanTest extends TestBaseSpec{
         then:
         !importLoanResponse.errors.isEmpty()
         importLoanResponse.errors.get(0).message == AppDefaults.LOAN_ID_ALREADY_EXIST
-        importLoanResponse.errors.get(0).field == "id"
+        importLoanResponse.errors.get(0).field == ""
 
     }
 

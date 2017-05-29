@@ -1,11 +1,10 @@
 package com.wandoo.homework.services;
 
 import com.wandoo.homework.base.AppDefaults;
-import com.wandoo.homework.beans.LoanBean;
-import com.wandoo.homework.exceptions.DuplicateObjectException;
 import com.wandoo.homework.model.Loan;
+import com.wandoo.homework.model.beans.LoanBean;
+import com.wandoo.homework.model.requestbeans.ImportLoanRequestBean;
 import com.wandoo.homework.repositories.LoanRepository;
-import com.wandoo.homework.requestbeans.ImportLoanRequestBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +32,9 @@ public class LoanService {
                 .collect(Collectors.toList());
     }
 
-    public void createLoan(ImportLoanRequestBean importLoanRequestBean) throws DuplicateObjectException {
+    public void createLoan(ImportLoanRequestBean importLoanRequestBean) throws Exception {
         if (loanRepository.get(importLoanRequestBean.getId()).isPresent()) {
-            throw new DuplicateObjectException(AppDefaults.LOAN_ID_ALREADY_EXIST);
+            throw new Exception(AppDefaults.LOAN_ID_ALREADY_EXIST);
         }
         loanRepository.createLoan(new Loan(importLoanRequestBean));
     }

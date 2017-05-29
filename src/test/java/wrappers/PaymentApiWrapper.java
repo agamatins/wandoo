@@ -1,8 +1,9 @@
 package wrappers;
 
-import com.wandoo.homework.beans.PaymentBean;
-import com.wandoo.homework.requestbeans.ImportPaymentRequestBean;
-import com.wandoo.homework.responsebeans.BaseResponseBean;
+
+import com.wandoo.homework.model.beans.PaymentBean;
+import com.wandoo.homework.model.requestbeans.ImportPaymentRequestBean;
+import com.wandoo.homework.model.responsebeans.BaseResponseBean;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;

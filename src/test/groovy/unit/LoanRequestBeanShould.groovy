@@ -1,7 +1,7 @@
 package unit
 
 import com.wandoo.homework.base.AppDefaults
-import com.wandoo.homework.requestbeans.ImportLoanRequestBean
+import com.wandoo.homework.model.requestbeans.ImportLoanRequestBean
 import spock.lang.Specification
 import spock.lang.Unroll
 

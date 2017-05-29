@@ -12,14 +12,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class LoanRepositoryImpl implements LoanRepository {
+public class DefaultLoanRepository implements LoanRepository {
 
     @Autowired
     private EntityManager entityManager;
 
     @Override
     public void createLoan(Loan loan) {
-        entityManager.unwrap(Session.class).save(loan);
+        entityManager.persist(loan);
     }
 
     @Override
